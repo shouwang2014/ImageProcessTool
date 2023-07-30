@@ -1,6 +1,0 @@
-3rdParty/
-.vs/
-x64/Debug/
-ImageProcess/x64/
-*.vcxproj
-*.user
