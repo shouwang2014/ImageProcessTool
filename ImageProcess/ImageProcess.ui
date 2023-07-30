@@ -137,7 +137,53 @@
     </property>
     <addaction name="aboutAction"/>
    </widget>
+   <widget class="QMenu" name="enhanceMenu">
+    <property name="title">
+     <string>增强</string>
+    </property>
+    <widget class="QMenu" name="grayTranMenu">
+     <property name="title">
+      <string>灰度变换</string>
+     </property>
+     <addaction name="linearTranAction"/>
+     <addaction name="separator"/>
+     <addaction name="logTranAction"/>
+     <addaction name="gammaTranAction"/>
+    </widget>
+    <widget class="QMenu" name="algebTranMenu">
+     <property name="title">
+      <string>代数变换</string>
+     </property>
+     <addaction name="addAction"/>
+     <addaction name="subAction"/>
+     <addaction name="multiAction"/>
+    </widget>
+    <widget class="QMenu" name="sharpMenu">
+     <property name="title">
+      <string>锐化</string>
+     </property>
+     <addaction name="lapTranAction"/>
+     <addaction name="sobelTranAction"/>
+    </widget>
+    <addaction name="grayTranMenu"/>
+    <addaction name="algebTranMenu"/>
+    <addaction name="histEnhanAction"/>
+    <addaction name="sharpMenu"/>
+   </widget>
+   <widget class="QMenu" name="denoiseMenu">
+    <property name="title">
+     <string>降噪</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="cutMenu">
+    <property name="title">
+     <string>分割</string>
+    </property>
+   </widget>
    <addaction name="fileMean"/>
+   <addaction name="enhanceMenu"/>
+   <addaction name="denoiseMenu"/>
+   <addaction name="cutMenu"/>
    <addaction name="aboutMean"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
@@ -152,6 +198,51 @@
   <action name="aboutAction">
    <property name="text">
     <string>关于</string>
+   </property>
+  </action>
+  <action name="histEnhanAction">
+   <property name="text">
+    <string>直方图增强</string>
+   </property>
+  </action>
+  <action name="linearTranAction">
+   <property name="text">
+    <string>线性变换</string>
+   </property>
+  </action>
+  <action name="logTranAction">
+   <property name="text">
+    <string>对数变换</string>
+   </property>
+  </action>
+  <action name="gammaTranAction">
+   <property name="text">
+    <string>Gamma变换</string>
+   </property>
+  </action>
+  <action name="addAction">
+   <property name="text">
+    <string>加法运算</string>
+   </property>
+  </action>
+  <action name="subAction">
+   <property name="text">
+    <string>减法运算</string>
+   </property>
+  </action>
+  <action name="multiAction">
+   <property name="text">
+    <string>乘法运算</string>
+   </property>
+  </action>
+  <action name="lapTranAction">
+   <property name="text">
+    <string>Laplace变换</string>
+   </property>
+  </action>
+  <action name="sobelTranAction">
+   <property name="text">
+    <string>Sobel变换</string>
    </property>
   </action>
  </widget>
