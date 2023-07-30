@@ -4,4 +4,7 @@ x64/Debug/
 ImageProcess/x64/
 *.vcxproj
 *.user
+<<<<<<< HEAD
+=======
 *.filters
+>>>>>>> 338cd5a50d490c64f3cf0fe0decde38ddc8c742f
