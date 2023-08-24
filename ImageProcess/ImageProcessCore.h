@@ -6,4 +6,7 @@
 
 cv::Mat LoadImage(const std::string& filepath);
 
+//Image Enhance
+
+
 #endif

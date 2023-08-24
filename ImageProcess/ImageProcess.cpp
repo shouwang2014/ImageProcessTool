@@ -28,6 +28,49 @@ void ImageProcess::resizeEvent(QResizeEvent * event)
     ui.ImageGraphView->fitInView(boundRect, Qt::KeepAspectRatio);
 }
 
+void ImageProcess::updateGraphicView(QGraphicsScene* scene, QGraphicsView* viewer)
+{
+    if (!_img.empty())
+    {
+        QImage qImg;
+        if (1 == _img.channels())
+        {
+            qImg = QImage(_img.data, _img.cols, _img.rows, _img.step, QImage::Format_Grayscale8);
+        }
+        else if (3 == _img.channels())
+        {
+            qImg = QImage(_img.data, _img.cols, _img.rows, _img.step, QImage::Format_BGR888);
+        }
+
+        QPixmap pImg = QPixmap::fromImage(qImg);
+
+        if (!pImg.isNull())
+        {
+            scene->clear();
+
+            //创建QGraphicsPixmapItem对象,并添加到场景中
+            QGraphicsPixmapItem* item = scene->addPixmap(pImg);
+
+            //更新scene的sceneRect
+            QRectF itemBoundRect = item->boundingRect();
+            scene->setSceneRect(itemBoundRect);
+
+            //将场景设置为视图的场景
+            viewer->setScene(scene);
+
+            QRectF boundRect = scene->sceneRect();
+            ui.ImageGraphView->fitInView(boundRect, Qt::KeepAspectRatio);
+
+            //设置视图属性
+            viewer->setRenderHint(QPainter::Antialiasing); //抗锯齿
+            viewer->setDragMode(QGraphicsView::ScrollHandDrag); //拖拽模式
+            viewer->setViewportUpdateMode(QGraphicsView::FullViewportUpdate); //视口更新模式
+            
+            viewer->show();
+        }
+    }
+}
+
 void ImageProcess::on_openAction_triggered()
 {
     QString curPath = settings.value("LastPath").toString();
@@ -50,18 +93,18 @@ void ImageProcess::on_openAction_triggered()
 
     std::string filepath = fileName.toStdString();
 
-    cv::Mat img = LoadImage(filepath);
+    _img = LoadImage(filepath);
 
-    if (!img.empty())
+    if (!_img.empty())
     {
         QImage qImg;
-        if (1 == img.channels())
+        if (1 == _img.channels())
         {
-            qImg = QImage(img.data, img.cols, img.rows, img.step, QImage::Format_Grayscale8);
+            qImg = QImage(_img.data, _img.cols, _img.rows, _img.step, QImage::Format_Grayscale8);
         }
-        else if (3 == img.channels())
+        else if (3 == _img.channels())
         {
-            qImg = QImage(img.data, img.cols, img.rows, img.step, QImage::Format_BGR888);
+            qImg = QImage(_img.data, _img.cols, _img.rows, _img.step, QImage::Format_BGR888);
         }
 
         QPixmap pImg = QPixmap::fromImage(qImg);
@@ -99,5 +142,22 @@ void ImageProcess::on_aboutAction_triggered()
 {
     about->setWindowFlags(Qt::WindowCloseButtonHint);
     about->show();
+    
+}
+
+void ImageProcess::on_linearTranAction_triggered()
+{
+    int lowGray = 0, highGray = 255;
+    cv::Mat dst;
+    //dst = linearTran();
+}
+
+void ImageProcess::on_gammaTranAction_triggered()
+{
+    
+}
+
+void ImageProcess::on_logTranAction_triggered()
+{
     
 }
